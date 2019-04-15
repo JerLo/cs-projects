@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>My Favorite Places</title>
+	<link rel="stylesheet" type="text/css" href="Style.css">
+    <script>
+        function isAlpha() {
+            var event = document.getElementById("eventIn").value;
+            var loc = document.getElementById("locIn").value;
+            var letters = /^[0-9a-zA-Z]+$/;
+            var valid = "true";
+            if(!(event.match(letters))) {
+                alert("Error. Event name must be alphanumeric!");
+                valid = "false";
+            }
+            if(!(loc.match(letters))) {
+                alert("Error. Location name must be alphanumeric!");
+                valid = "false";
+            }
+            if (valid == "false") {
+                return false;
+            }
+            window.location.href = "Success.html";
+            return false;
+        }
+    </script>
+</head>
+<body>
+	<div class="navbar">
+		<a href="MySchedule.html">My Schedule</a>
+		<a href="MyPlaces.html">My Favorite Places</a>
+		<a class="active" href="MyForm.html">Form Input</a>
+		<a href="MyWidgets.html">My Widgets</a>	
+	</div>
+    <div class="wrap">
+    <form method="get" onsubmit="return isAlpha()">
+        <div class="row">
+            <div class="formcol">
+                <label>Day of the week</label>
+            </div>
+            <div class="formcol">
+                <select>
+                    <option value="Mon">Monday</option>
+                    <option value="Tue">Tuesday</option>
+                    <option value="Wed">Wednesday</option>
+                    <option value="Thur">Thursday</option>
+                    <option value="Fri">Friday</option>
+                    <option value="Sat">Saturday</option>
+                    <option value="Sun">Sunday</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="formcol">
+                <label>Start Time</label>
+            </div>
+            <div class="formcol">
+                <input type="time">
+            </div>
+        </div>
+        <div class="row">
+            <div class="formcol"> 
+                <label>End Time</label>
+            </div>
+            <div class="formcol">
+                <input type="time">
+            </div>
+        </div>
+        <div class="row">
+            <div class="formcol"> 
+                <label>Event Name</label>
+            </div>
+            <div class="formcol">
+                <input type="text" id="eventIn" placeholder="event name here...">
+            </div>
+        </div>
+        <div class="row">
+            <div class="formcol"> 
+                <label>Location</label>
+            </div>
+            <div class="formcol">
+                <input type="text" id="locIn" placeholder="location here...">
+            </div>
+        </div>
+        <div class="row">
+            <div class="formcol"> 
+                <label>Enter URL for the picture</label>
+            </div>
+            <div class="formcol">
+                <input type="url" placeholder="url here..." required>
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+    </div>
+    <div id = "inputMap">
+    </div>
+    <script>
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("inputMap"), {
+            center: {lat: 44.9727, lng:-93.23540000000003},
+            zoom: 14
+        });
+        var input = document.getElementById("locIn");
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    }
+        
+    function codeAddress(geocoder, resultMap, address) {
+        geocoder.geocode({'address':address}, function(results, status) {
+            if(status === google.maps.GeocoderStatus.OK) {
+                var marker = new google.maps.Marker({
+                    map: resultMap,
+                    position: results[0].geometry.location,
+                    icon: "Images/gopherhead.png",
+                    title: address
+                });
+            }
+        });
+    }
+        
+    
+    </script>
+    <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDi9P3hih2gqTXAFFrVfarIP4TqjwT5Sg0&libraries=places&callback=initMap"
+	async defer></script>
+</body>
+</html>

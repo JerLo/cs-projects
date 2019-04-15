@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>My Spring 2019 Schedule</title>
+	<link rel="stylesheet" type="text/css" href="Style.css">
+</head>
+<body>
+	<div class="navbar">
+		<a class="active" href="MySchedule.html">My Schedule</a>
+		<a href="MyPlaces.html">My Favorite Places</a>
+		<a href="MyForm.html">Form Input</a>
+		<a href="MyWidgets.html">My Widgets</a>	
+	</div>
+    <div id = "google_translate">
+    </div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate');
+        }
+</script>
+	<h1>My Spring 19 Schedule</h1>
+	<div>
+		<table>
+			<colgroup>
+				<col class="day" span="1">
+				<col class="event" span="1">
+				<col class="event" span="1">
+				<col class="event" span="1">
+			</colgroup>
+			<tr class="odd">
+				<td>Mon</td>
+				<td onmouseover="mouseOver('keller')">
+					<p>1:00pm - 2:15</p>
+					<p class = "name">CSCI 5801 - KH3-230</p>
+					<p><img class="thumb_keller" alt = "k" src="Images/keller.jpg"></p>
+					<p class = "address">100 Union St SE, Minneapolis, MN 55455</p>
+				</td>
+				<td onmouseover="mouseOver('keller')">
+					<p>2:30pm - 3:45</p>
+					<p class = "name">CSCI 4611 - KH3-230</p>
+					<img class="thumb_keller" alt = "k" src="Images/keller.jpg">
+					<p class = "address">100 Union St SE, Minneapolis, MN 55455</p>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr class="even">
+				<td>Tue</td>
+				<td onmouseover="mouseOver('carlson')">
+					<p>1:45pm - 3:25</p>
+					<p class = "name">IDSC 3103 - CarlsonL-117</p>
+					<img class="thumb_carlson" alt = "c" src="Images/carlson.jpg">
+					<p class = "address">321 19th Ave S, Minneapolis, MN 55455</p>
+				</td>
+				<td onmouseover="mouseOver('amund')">
+					<p>4:00pm - 5:15</p>
+					<p class = "name">CSCI 4511W - AmundB75</p>
+					<img class="thumb_amund" alt = "a" src="Images/amundson.jpg">
+					<p class = "address">421 Washington Ave SE, Minneapolis, MN 55455</p>
+				</td>
+				<td onmouseover="mouseOver('keller')">
+					<p>6:30pm - 9:00</p>
+					<p class = "name">CSCI 4131 - KH3-210</p>
+					<img class="thumb_keller" alt = "k" src="Images/keller.jpg">
+					<p class = "address">100 Union St SE, Minneapolis, MN 55455</p>
+				</td>			
+			</tr>
+			<tr class="odd">
+				<td>Wed</td>
+				<td onmouseover="mouseOver('keller')">
+					<p>1:00pm - 2:15</p>
+					<p class = "name">CSCI 5801 - KH3-230</p>
+					<img class="thumb_keller" alt = "k" src="Images/keller.jpg">
+					<p class = "address">100 Union St SE, Minneapolis, MN 55455</p>
+				</td>
+				<td onmouseover="mouseOver('keller')">
+					<p>2:30pm - 3:45</p>
+					<p class = "name">CSCI 4611 - KH3-230</p>
+					<img class="thumb_keller" alt = "k" src="Images/keller.jpg">
+					<p class = "address">100 Union St SE, Minneapolis, MN 55455</p>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr class="even">
+				<td>Thu</td>
+				<td onmouseover="mouseOver('carlson')">
+					<p>1:45pm - 3:25</p>
+					<p class = "name">IDSC 3103 - CarlsonL-117</p>
+					<img class="thumb_carlson" alt = "c" src="Images/carlson.jpg">
+					<p class = "address">321 19th Ave S, Minneapolis, MN 55455</p>
+				</td>
+				<td onmouseover="mouseOver('amund')">
+					<p>4:00pm - 5:15</p>
+					<p class = "name">CSCI 4511W - AmundB75</p>
+					<img class="thumb_amund" alt = "a" src="Images/amundson.jpg">
+					<p class = "address">421 Washington Ave SE, Minneapolis, MN 55455</p>
+				</td>
+				<td>&nbsp;</td>
+			</tr>	
+			<tr class="odd">
+				<td>Fri</td>
+				<td class="nothing" colspan="3">
+					<p>There is nothing scheduled for the day</p>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>Sat</td>
+				<td class="nothing" colspan="3">
+					<p>There is nothing scheduled for the day</p>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>Sun</td>
+				<td class="nothing" colspan="3">
+					<p>There is nothing scheduled for the day</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+    <div id="slideshow">
+        <div class = "slide">
+            <img src = "Images/gophers-mascot.png" style = "width:100%" alt = "gopher_slide">
+        </div>
+        <div class = "slide">
+            <img src = "Images/keller.jpg" style = "width:100%" alt = "keller_slide">
+        </div>
+        <div class = "slide">
+            <img src = "Images/amundson.jpg" style = "width:100%" alt = "amundson_slide">
+        </div>
+        <div class = "slide">
+            <img src = "Images/carlson.jpg" style = "width:100%" alt = "carlson_slide">
+        </div>
+        <div class = "slideButton">
+            <button type = "button" onclick="slideShow(1)">Play</button>
+            <button type = "button" onclick="slideStop()">Stop</button>
+        </div>    
+    </div>
+    <div id = "panel">
+    </div>
+    <div id = "map">
+	</div>
+    <div class = "mapForm">
+        <table class = "mapTable">
+            <tr class = "map_r">
+                <td class = "map_d" colspan = "1">Find</td>
+                <td class = "map_d"  colspan = "2">    
+                    <select id = "dropdown" onChange="disabler()">
+                        <option value="restaurant">Restaurant</option>
+                        <option value="hospital">Hospital</option>
+                        <option value="parking">Parking</option>
+                        <option value="supermarket">Supermarket</option>
+                        <option value="other">Other</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class = "map_r">
+                <td class = "map_d"  colspan = "3"><input type = "text" placeholder = "Enter Other Places" id="locationTextField" disabled/></td>
+            </tr>
+            <tr class = "map_r">
+                <td class = "map_d"  colspan = "1">In</td>
+                <td class = "map_d"  colspan = "1"><input type = "number" id = "enterRange"/></td>
+                <td class = "map_d"  colspan = "1">meters</td>
+            </tr>
+            <tr class = "map_r">
+                <td class = "map_d"  colspan = "1"><button type="button" id = "searchBtn" onclick="submitPlace()">Search</button></td>
+            </tr>
+        </table>
+        <table class = "mapTable">
+            <tr class = "map_r">
+                <td class = "map_d"  colspan = "3">Direction To</td>
+            </tr>
+            <tr class = "map_r">
+                <td class = "map_d"  colspan = "2"><input type = "text" placeholder = "Enter Place" id = "enterDir"/></td>
+                <td class = "map_d"  colspan = "1">By</td>
+            </tr>
+            <tr class = "map_r">
+                <td class = "map_d" colspan = "1"><input type = "radio" name = "dir" id = "walk" value = "walking"></td>
+                <td class = "map_d" colspan = "1">Walk</td>
+            </tr>
+            <tr class = "map_r">
+                <td class = "map_d"  colspan = "1"><input type = "radio" name = "dir" id = "transit" value = "transit"></td>
+                <td class = "map_d"  colspan = "1">Transit</td>
+            </tr>
+            <tr class = "map_r">
+                <td class = "map_d"  colspan = "1"><input type = "radio" name = "dir" id = "drive" value = "driving"></td>
+                <td class = "map_d"  colspan = "1">Drive</td>
+                <td class = "map_d"><button type="button" id = "dirBtn">Go</button></td>
+            </tr>
+        </table>
+    </div>
+    
+    <script src = "MySchedule.js"></script>
+	<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDi9P3hih2gqTXAFFrVfarIP4TqjwT5Sg0&libraries=places&callback=initMap"
+	async defer></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

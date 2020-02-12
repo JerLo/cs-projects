@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+<nav class="navbar navbar-default">
+          <div class="container-fluid">
+              <ul class="nav navbar-nav">
+                  <li><a href="/"><b>Home</b></a></li>
+                  <li><a href="/schedule"><b>Schedule</b></a></li>
+                  <li><a href="/addSchedule"><b>Add Schedule Event</b></a></li>
+                  <li><a href="/stock"><b>Stock Page</b></a></li>
+                  <li><a href="/admin"><b>Admin</b></a></li>
+                  <li><a href="/logout"><b>Logout</b></a></li>
+              </ul>
+          </div>
+      </nav><br><br><br>
+
+      <div class="container">
+
+          <div class="row">
+              <p><br /></p>
+          </div>
+
+          <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                  <div class="panel panel-default">
+                      <form name="admin" method="post" action="/postUser">
+                          <p></p>
+                          <table class="table table-bordered table-hover">
+                              <tbody>
+                                  <tr>
+                                      <td class="col-md-6">Name</td>
+                                      <td class="col-md-6">
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" name="accName" id="accName" required maxlength="30">
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6">Login</td>
+                                      <td class="col-md-6">
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" name="accLogin" id="accLogin" required maxlength="30">
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6">New Password</td>
+                                      <td class="col-md-6">
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" name="accPassword" id="accPassword" required maxlength="30">
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6"></td>
+                                      <td class="col-md-6">
+                                          <input type="submit" value="Add User">
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </form>
+                  </div>
+              </div>
+              <div class="col-md-4"></div>
+          </div>
+      </div>
+      <div>
+        <p id="delErrMsg" style="display: none">Cannot delete a user that is logged in!</p>
+        <p id="postErrMsg" style="display: none">User with login already exists!</p>
+        <p id="editErrMsg" style="display: none">Login is used by another user!</p>
+        <table class=table table-hover>
+          <thead>
+            <tr>
+              <th>Admin ID</th>
+              <th>Name</th>
+              <th>Login</th>
+              <th>New Password</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tblData"></tbody>
+        </table>
+      </div>
+      <script type="text/javascript">
+        var xmlhttp = new XMLHttpRequest();
+        var url = "/getListofUsers";
+        xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var myArr = JSON.parse(xmlhttp.responseText);
+            var myData = myArr["users"];
+            myFunction(myData);
+          }
+        }
+        xmlhttp.withCredentials = true;
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+        var xmlhttp2 = new XMLHttpRequest();
+        var url2 = "/errorFlag";
+        xmlhttp2.onreadystatechange = function() {
+          if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
+            var myObj = JSON.parse(xmlhttp2.responseText)
+            var myDel = myObj["delErr"];
+            var myPost = myObj["postErr"];
+            var myEdit = myObj["editErr"];
+            console.log("getting flags");
+            delErrFlag(myDel);
+            postErrFlag(myPost);
+            editErrFlag(myEdit);
+          }
+        }
+        xmlhttp2.withCredentials = true;
+        xmlhttp2.open("GET", url2, true);
+        xmlhttp2.send();
+
+        function myFunction(arr) {
+            console.log("displaying users");
+              var tablestr = "";
+              var i;
+              for(i = 0; i < arr.length; i++) {
+                  tablestr += '<tr>' +
+                      '<td>' + arr[i]["acc_id"] + '</td>' +
+                      '<td>' + arr[i]["acc_name"] + '</td>' +
+                      '<td>' + arr[i]["acc_login"] + '</td>' +
+                      '<td>' + arr[i]["acc_password"] + '</td>' +
+                      "<td><button type='button' class='btnEdit'>" +
+                      "<span class='glyphicon glyphicon-pencil'></span></button></td>" +
+                      "<td><button type='button' class='btnDel'>" +
+                      "<span class='glyphicon glyphicon-trash'></span></button></td>" +
+                      '</tr>';
+              }
+              console.log(tablestr);
+              $("#tblData").append(tablestr);
+              $(".btnDel").bind("click", delUser);
+              $(".btnEdit").bind("click", editUser);
+        }
+
+        function delErrFlag(val) {
+          var msg = document.getElementById("delErrMsg");
+          if(val) {
+            msg.style.display = "block";
+          }
+          else {
+            msg.style.display = "none";
+          }
+        }
+
+        function postErrFlag(val) {
+          var msg = document.getElementById("postErrMsg");
+          if(val) {
+            msg.style.display = "block";
+          }
+          else {
+            msg.style.display = "none";
+          }
+        }
+
+        function editErrFlag(val) {
+          var msg = document.getElementById("editErrMsg");
+          if(val) {
+            msg.style.display = "block";
+          }
+          else {
+            msg.style.display = "none";
+          }
+        }
+
+        function logout() {
+          var xmlhttp = new XMLHttpRequest();
+          var url = "/logout";
+          xmlhttp.open("GET", url, true);
+          xmlhttp.send();
+        }
+
+        function editUser() {
+          var parentvar = $(this).parent().parent();
+          var tdID = parentvar.children("td:nth-child(1)");
+          var tdName = parentvar.children("td:nth-child(2)");
+          var tdLogin = parentvar.children("td:nth-child(3)");
+          var tdPass = parentvar.children("td:nth-child(4)");
+          console.log("sending oldLogin info");
+          console.log(parentvar.html());
+          var htmlStr = "<td>" + tdID.html() + "</td>" +
+          "<td><input type='text' name='newName' id='newName'></td>" +
+          "<td><input type='text' name='newLogin' id='newLogin'></td>" +
+          "<td><input type='text' name='newPass' id='newPass'></td>" +
+          "<td><button type='button' id='saveEvent' onclick='saveUser'>" +
+          "<span class='glyphicon glyphicon-floppy-disk'>" +
+          "</span></button></td>" +
+          "<td><button type='button' id='cancelEvent' onclick='cancelUser'>" +
+          "<span class='glyphicon glyphicon-refresh'>" +
+          "</span></button></td>";
+          parentvar.html(htmlStr);
+          document.getElementById("saveEvent").addEventListener("click", function() {
+            saveUser(tdLogin.html());
+          });
+          document.getElementById("cancelEvent").addEventListener("click", cancelUser);
+          
+        }
+
+        function saveUser(loginStr) {
+          console.log("in saveUser");
+          var xmlhttp = new XMLHttpRequest();
+          var url = "/updateUser";
+          var params = "oldLogin=" + loginStr + 
+          "&newName=" + document.getElementById("newName").value +
+          "&newLogin=" + document.getElementById("newLogin").value +
+          "&newPass=" + document.getElementById("newPass").value;
+          console.log(params);
+          xmlhttp.open("POST", url, true);
+          xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xmlhttp.send(params);
+          location.reload();
+        }
+
+        function cancelUser() {
+          console.log("in cancelUser");
+          location.reload();
+        }
+
+        function delUser() {
+          var xmlhttp = new XMLHttpRequest();
+          var url = "/deleteUser";
+          var parentvar = $(this).parent().parent();
+          var tdLogin = parentvar.children("td:nth-child(3)");
+          console.log("getting login info");
+          console.log(tdLogin.html());
+          var params = "tdLogin=" + tdLogin.html();
+          xmlhttp.open("POST", url, true);
+          xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xmlhttp.send(params);
+          location.reload();
+        }
+      </script>
+  </body>
+</html>

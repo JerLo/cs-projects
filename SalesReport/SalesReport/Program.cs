@@ -75,7 +75,6 @@ namespace SalesReport
             MySqlDataReader dataReader;
             try
             {
-                Console.WriteLine(ConfigurationManager.AppSettings["connectionStr"]);
                 connect = new MySqlConnection(ConfigurationManager.AppSettings["connectionStr"]);
                 connect.Open();
                 Console.WriteLine("Connected!");

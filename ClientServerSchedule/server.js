@@ -38,7 +38,7 @@ fs.readFile(__dirname + '/dbconfig.xml', function(err, data) {
 app.use(bodyparser());
 
 // use express-session
-// in mremory session is sufficient for this assignment
+// in mremory session is sufficient
 app.use(session({
   secret: "csci4131secretkey",
   saveUninitialized: true,

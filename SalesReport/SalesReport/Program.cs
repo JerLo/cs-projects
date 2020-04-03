@@ -10,8 +10,6 @@ namespace SalesReport
 
         public static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
-            //selectAll("stores");
             Console.WriteLine("Enter start date for sales report");
             Console.Write("Start month: ");
             string startMonth = Console.ReadLine();
@@ -73,7 +71,6 @@ namespace SalesReport
 
         static private void genReport(string start, string end)
         {
-            //String connectionString = "server=localhost;database=sample;uid=JerLo;pwd=jgameslayer13";
             MySqlConnection connect;
             MySqlDataReader dataReader;
             try
@@ -88,10 +85,7 @@ namespace SalesReport
                     "INNER JOIN customers ON orders.customer_id = customers.customer_id " +
                     "WHERE order_date BETWEEN " + "'" + start + "'" + " AND " + "'" + end + "'";
 
-                //Console.WriteLine(sqlQuery);
-                dataReader = new MySqlCommand(sqlQuery, connect).ExecuteReader();
-                Console.WriteLine("Query accepted");
-                
+                dataReader = new MySqlCommand(sqlQuery, connect).ExecuteReader();        
                 var columns = new List<string>();
                 for(int i=0; i<dataReader.FieldCount; i++)
                 {
